@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component,Fragment } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      // Fragment 占位符
+      <Fragment>
+        <h3>代办事项</h3>
+        <div><input style={{marginRight: '10px'}}></input><button>提交</button></div>
+        <ul>
+          <li>吃</li>
+          <li>睡</li>
+          <li>玩</li>
+        </ul>
+      </Fragment>
+    )
+  }
 }
 
 export default App;
