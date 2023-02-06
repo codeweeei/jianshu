@@ -1,8 +1,8 @@
-import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from "./actionTypes";
+import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_ACTION } from "./actionTypes";
 // state：store存储的数据
 const defaultState = {
   inputValue: '123',
-  list: [1, 2]
+  list: []
 }
 
 export default (state = defaultState, action) => {
@@ -18,6 +18,10 @@ export default (state = defaultState, action) => {
   }else if(action.type === DELETE_TODO_ITEM) {
     const newState = JSON.parse(JSON.stringify(state))
     newState.list.splice(action.index, 1)
+    return newState
+  }else if(action.type === INIT_LIST_ACTION) {
+    const newState = JSON.parse(JSON.stringify(state))
+    newState.list = action.data
     return newState
   }
   // 返回给store
