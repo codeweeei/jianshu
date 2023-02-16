@@ -1,5 +1,75 @@
 # 仿简书项目学习记录
 
+## 头部组件
+
+- 头部 logo 图片的引入
+
+```js
+import styled from 'styled-components'
+import xxx from '../../logo.png'
+// 注意react引入的组件名都得大写
+export const Logo = styled.a.attrs({
+	// 设置 a 标签的属性
+	href: '/',
+})`
+	background: url(${xxx});
+	background-size: contain;
+`
+export const NavBar = styled.div`
+	&.left {
+		float: left;
+	}
+	&.right {
+		float: right;
+	}
+`
+```
+
+### iconfont 的引入
+
+- 项目全局引入 iconfont css 类名
+
+```js
+import { injectGlobal } from 'styled-components'
+injectGlobal`
+  @font-face {
+    //...
+  }
+  .iconfont {
+    //...
+  }
+`
+```
+
+### 头部搜索框动画
+
+- 数据改变->页面改变：通过 input 聚焦状态变量来动态给 input 设置 class，进而对其 width 进行更改时添加上动画过渡
+- 动画可以使用 react-transition-group 中的 CSSTransition
+
+```js
+<CSSTransition in={this.state.focused} timeout={200} className='side'>
+	<Search />
+</CSSTransition>
+```
+
+会在 Search 上挂载如下样式：
+
+- side-enter
+- side-enter-active
+- side-exit
+- side-exit-active
+
 ## npm 包
 
-- styled-components
+### styled-components
+
+css 文件：style 后缀 -> js 后缀
+样式的组件化，生成样式组件，避免不同文件之间 css 的污染
+
+### normalize.css
+
+- 统一代码样式在不同浏览器的统一
+
+### react-transition-group
+
+- 动画插件
