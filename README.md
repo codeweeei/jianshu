@@ -43,7 +43,7 @@ injectGlobal`
 
 ### 头部搜索框动画
 
-- 数据改变->页面改变：通过 input 聚焦状态变量来动态给 input 设置 class，进而对其 width 进行更改时添加上动画过渡
+- 数据改变->页面改变：通过 input 聚焦状态变量 focused 来动态给 input 设置 class，进而对其 width 进行更改时添加上动画过渡
 - 动画可以使用 react-transition-group 中的 CSSTransition
 
 ```js
@@ -58,6 +58,22 @@ injectGlobal`
 - side-enter-active
 - side-exit
 - side-exit-active
+
+### redux 管理组件数据
+
+将 focused 放置 redux 进行管理
+react-redux 的引入
+reducer 里如果存放过多的逻辑或代码，就会变得不好维护，因此需要进行 reducer 的拆分
+
+- reducer 的拆分，再利用 combineReducers 进行组合
+
+```js
+import { combineReducers } from 'redux'
+import headerReducer from '../common/header/store/reducer'
+export default combineReducers({
+	header: headerReducer,
+})
+```
 
 ## npm 包
 

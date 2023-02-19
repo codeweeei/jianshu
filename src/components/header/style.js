@@ -29,7 +29,7 @@ const Input = styled.input.attrs({
   width: 240px;
   margin-left: 180px;
   box-sizing: border-box;
-  padding: 0 40px 0 20px;
+  padding: 0 70px 0 20px;
   border-radius: 4px;
 	font-size: 14px;
 	color: #666;

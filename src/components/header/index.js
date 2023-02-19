@@ -1,5 +1,6 @@
 // 头部组件
 import { useState } from 'react'
+import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { DownOutlined } from '@ant-design/icons'
 import { Dropdown } from 'antd'
@@ -16,15 +17,10 @@ import {
   Button
 } from "./style"
 
-function Header() {
-  const [focused, setFocused] = useState(false)
-  const [nodeRef] = useState(null)
-  const inputFocus = () => {
-    setFocused(true)
-  }
-  const inputBlue = () => {
-    setFocused(false)
-  }
+function Header(props) {
+  // const [focused, setFocused] = useState(false)
+  let { focused, inputFocus, inputBlur } = props
+  const [nodeRef] = useState({})
   return (
     <HeaderBox>
       <HeaderWrapper>
@@ -43,7 +39,7 @@ function Header() {
             <NavBarItem>插件</NavBarItem>
             <InputContainer>
               <CSSTransition nodeRef={nodeRef} in={focused} timeout={200} classNames="slide">
-                <Input onFocus={inputFocus} onBlur={inputBlue} className={ focused ? 'focused' : '' }></Input>
+                <Input onFocus={inputFocus} onBlur={inputBlur} className={ focused ? 'focused' : '' }></Input>
               </CSSTransition>
               <InputIcon className={ focused ? 'focused' : '' }>
                 <i className={ focused ? 'iconfont icon-sousuo focused' : 'iconfont icon-sousuo'}></i>
@@ -76,5 +72,26 @@ function Header() {
     </HeaderBox>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    focused: state.focused // 将store里的focused映射到组件的props上 
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    inputFocus() {
+      const action = {
+        type: 'search_focus'
+      }
+      dispatch(action)
+    },
+    inputBlur() {
+      const action = {
+        type: 'search_blur'
+      }
+      dispatch(action)
+    }
+  }
+}
 
-export default Header
+export default connect(mapStateToProps, mapDispatchToProps)(Header) 
