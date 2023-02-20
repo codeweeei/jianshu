@@ -1,5 +1,5 @@
 // 头部组件
-import { useState } from 'react'
+import { createRef } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { DownOutlined } from '@ant-design/icons'
@@ -20,7 +20,7 @@ import {
 function Header(props) {
   // const [focused, setFocused] = useState(false)
   let { focused, inputFocus, inputBlur } = props
-  const [nodeRef] = useState({})
+  const inputRef = createRef()
   return (
     <HeaderBox>
       <HeaderWrapper>
@@ -38,8 +38,8 @@ function Header(props) {
             <NavBarItem>APP</NavBarItem>
             <NavBarItem>插件</NavBarItem>
             <InputContainer>
-              <CSSTransition nodeRef={nodeRef} in={focused} timeout={200} classNames="slide">
-                <Input onFocus={inputFocus} onBlur={inputBlur} className={ focused ? 'focused' : '' }></Input>
+              <CSSTransition nodeRef={inputRef} in={focused} timeout={200} classNames="slide">
+                <Input ref={inputRef} onFocus={inputFocus} onBlur={inputBlur} className={ focused ? 'focused' : '' }></Input>
               </CSSTransition>
               <InputIcon className={ focused ? 'focused' : '' }>
                 <i className={ focused ? 'iconfont icon-sousuo focused' : 'iconfont icon-sousuo'}></i>
@@ -74,7 +74,7 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    focused: state.focused // 将store里的focused映射到组件的props上 
+    focused: state.header.focused // 将store里的header里的focused映射到组件的props上 
   }
 }
 const mapDispatchToProps = (dispatch) => {
