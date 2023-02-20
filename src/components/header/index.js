@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { DownOutlined } from '@ant-design/icons'
 import { Dropdown } from 'antd'
+import { actionCreators } from './store'
 import { 
   HeaderWrapper, 
   Logo, 
@@ -74,22 +75,18 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    focused: state.header.focused // 将store里的header里的focused映射到组件的props上 
+    // 将store里的header里的focused映射到组件的props上
+    focused: state.get('header').get('focused') 
+    // 上述可简写为state.getIn(['header', 'focused'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     inputFocus() {
-      const action = {
-        type: 'search_focus'
-      }
-      dispatch(action)
+      dispatch(actionCreators.searchFocus())
     },
     inputBlur() {
-      const action = {
-        type: 'search_blur'
-      }
-      dispatch(action)
+      dispatch(actionCreators.searchBlur())
     }
   }
 }

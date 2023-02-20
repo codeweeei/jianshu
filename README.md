@@ -62,7 +62,9 @@ injectGlobal`
 ### redux 管理组件数据
 
 将 focused 放置 redux 进行管理
+
 - redux-devtools-extension 插件的引入：https://github.com/zalmoxisus/redux-devtools-extension
+
 ```js
 import { createStore, compose } from 'redux'
 import reducer from './reducer'
@@ -70,6 +72,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducer, composeEnhancers())
 export default store
 ```
+
 react-redux 的引入
 reducer 里如果存放过多的逻辑或代码，就会变得不好维护，因此需要进行 reducer 的拆分
 
@@ -83,12 +86,18 @@ export default combineReducers({
 })
 ```
 
+- 创建 actionCreator 来创建 action，并将 action 的类型用常量表示
+- 使用 immutable.js 库来管理 store 里的数据（不修改原来的 state，返回新的 state）
+- 使用 redux-immutable 库来管理 state 数据
+- 使用 redux-thunk ＋ ajax 在 action 进行网络请求(异步)
+
 ## npm 包
 
 ### styled-components
+
 - https://www.npmjs.com/package/styled-components
-css 文件：style 后缀 -> js 后缀
-样式的组件化，生成样式组件，避免不同文件之间 css 的污染
+  css 文件：style 后缀 -> js 后缀
+  样式的组件化，生成样式组件，避免不同文件之间 css 的污染
 
 ### normalize.css
 
@@ -98,3 +107,7 @@ css 文件：style 后缀 -> js 后缀
 
 - 动画插件
 - https://reactcommunity.org/react-transition-group/
+
+### Ajax
+
+- 网络请求插件
